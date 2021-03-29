@@ -26,6 +26,10 @@ else
 
 fi
 
+# if [[ "${RAILS_ENV}" = "test" ]]; then
+#     bundle exec rspec spec/
+# fi
+
 case "$@" in
 
   precompile)
