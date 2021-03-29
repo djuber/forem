@@ -32,6 +32,12 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/"${DOCKERIZE_VER
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz \
     && rm dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz
 
+# install chrome headless for front end testing
+RUN dnf install --setopt install_weak_deps=false -y \
+    chromium-headless chromedriver && \
+    yum clean all && \
+    rm -rf /var/cache/yum
+
 WORKDIR "${APP_HOME}"
 
 # Comment out running as the forem user due to this issue with podman-compose:
@@ -57,4 +63,4 @@ VOLUME "${APP_HOME}"/public/
 
 ENTRYPOINT ["./scripts/entrypoint.sh"]
 
-CMD ["bundle", "exec", "rails","server","-b","0.0.0.0","-p","3000"]
+CMD ["bundle", "exec", "rspec","spec"]
