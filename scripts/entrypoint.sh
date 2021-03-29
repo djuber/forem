@@ -2,6 +2,12 @@
 
 set -e
 
+if [ "$RAILS_ENV" = "test" ]; then
+  bundle exec rake db:schema:load
+
+  exec "$@"
+fi
+
 if [ -f tmp/pids/server.pid ]; then
   rm -f tmp/pids/server.pid
 fi
