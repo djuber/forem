@@ -33,8 +33,9 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/"${DOCKERIZE_VER
     && rm dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz
 
 # install chrome headless for front end testing
+# for whatever reason webdriver is looking for chromium, too
 RUN dnf install --setopt install_weak_deps=false -y \
-    chromium-headless chromedriver && \
+    chromium chromium-headless chromedriver && \
     yum clean all && \
     rm -rf /var/cache/yum
 
