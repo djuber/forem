@@ -4,6 +4,12 @@ ARG RAILS_ENV
 
 USER root
 
+# install chrome headless for front end testing
+# for whatever reason webdriver is looking for chromium, too
+RUN dnf install --setopt install_weak_deps=false -y \
+    chromium chromium-headless chromedriver
+# drop clean from here, because we will clean next
+
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo && \
     dnf install -y bash curl git ImageMagick iproute jemalloc less libcurl libcurl-devel \
                    libffi-devel libxml2-devel libxslt-devel nodejs pcre-devel \
@@ -20,7 +26,7 @@ RUN mkdir -p ${APP_HOME} && chown "${APP_UID}":"${APP_GID}" "${APP_HOME}"
 RUN groupadd -g "${APP_GID}" "${APP_USER}" && \
     adduser -u "${APP_UID}" -g "${APP_GID}" -d "${APP_HOME}" "${APP_USER}"
 
-ENV BUNDLER_VERSION=2.1.4
+ENV BUNDLER_VERSION=2.2.14
 RUN gem install bundler:"${BUNDLER_VERSION}"
 ENV GEM_HOME=/opt/apps/bundle/
 ENV BUNDLE_SILENCE_ROOT_WARNING=1 BUNDLE_APP_CONFIG="${GEM_HOME}"
@@ -32,12 +38,6 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/"${DOCKERIZE_VER
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz \
     && rm dockerize-linux-amd64-"${DOCKERIZE_VERSION}".tar.gz
 
-# install chrome headless for front end testing
-# for whatever reason webdriver is looking for chromium, too
-RUN dnf install --setopt install_weak_deps=false -y \
-    chromium chromium-headless chromedriver && \
-    yum clean all && \
-    rm -rf /var/cache/yum
 
 WORKDIR "${APP_HOME}"
 
