@@ -26,7 +26,7 @@ RUN mkdir -p ${APP_HOME} && chown "${APP_UID}":"${APP_GID}" "${APP_HOME}"
 RUN groupadd -g "${APP_GID}" "${APP_USER}" && \
     adduser -u "${APP_UID}" -g "${APP_GID}" -d "${APP_HOME}" "${APP_USER}"
 
-ENV BUNDLER_VERSION=2.2.14
+ENV BUNDLER_VERSION=2.2.15
 RUN gem install bundler:"${BUNDLER_VERSION}"
 ENV GEM_HOME=/opt/apps/bundle/
 ENV BUNDLE_SILENCE_ROOT_WARNING=1 BUNDLE_APP_CONFIG="${GEM_HOME}"
