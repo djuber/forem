@@ -3,7 +3,7 @@ services:
   rails:
     image: quay.io/forem/forem:development
     container_name: forem_rails
-    user: root
+    user: forem
     ports:
       - "3000:3000"
     depends_on:
@@ -31,7 +31,7 @@ services:
   bundle:
     image: quay.io/forem/forem:development
     container_name: forem_bundle
-    user: root
+    user: forem
     environment:
       RAILS_ENV: development
       REDIS_SESSIONS_URL: redis://redis:6379
@@ -46,7 +46,7 @@ services:
   yarn:
     image: quay.io/forem/forem:development
     container_name: forem_yarn
-    user: root
+    user: forem
     environment:
       RAILS_ENV: development
       REDIS_SESSIONS_URL: redis://redis:6379
@@ -61,7 +61,7 @@ services:
   webpacker:
     image: quay.io/forem/forem:development
     container_name: forem_webpacker
-    user: root
+    user: forem
     depends_on:
       - bundle
       - rails
@@ -81,7 +81,7 @@ services:
   seed:
     image: quay.io/forem/forem:development
     container_name: forem_seed
-    user: root
+    user: forem
     depends_on:
       - rails
       - redis
@@ -102,7 +102,7 @@ services:
   sidekiq:
     image: quay.io/forem/forem:development
     container_name: forem_sidekiq
-    user: root
+    user: forem
     depends_on:
       - rails
       - redis
@@ -162,4 +162,3 @@ services:
 volumes:
   db_data:
   es_data:
-
