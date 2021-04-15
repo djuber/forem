@@ -104,7 +104,7 @@ RUN bundle config --local build.sassc --disable-march-tune-native && \
 
 ENTRYPOINT ["./scripts/entrypoint.sh"]
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+CMD ["bundle", "exec", "rspec"]
 
 ## Development
 FROM builder AS development
