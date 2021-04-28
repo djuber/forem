@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  rails:
+  rspec:
     image: quay.io/forem/forem:testing
     container_name: forem_rails
     user: forem
@@ -25,10 +25,7 @@ services:
       STATEMENT_TIMEOUT: 10000
       APP_DOMAIN: rails
     volumes:
-      - type: bind
-        source: .
-        target: /opt/apps/forem
-        read_only: false
+      - .:/opt/apps/forem:delegated
     entrypoint: ["dockerize", "-wait", "tcp://db:5432", "-wait", "http://elasticsearch:9200", "-wait", "tcp://redis:6379", "-wait", "file:///opt/apps/forem/vendor/bundle/.bundle_finished", "-timeout", "2700s", "-wait-retry-interval", "10s"]
     command: [ "bash", "-c", "./scripts/entrypoint.sh bootstrap && bundle exec rspec --format=progress"]
 
@@ -45,9 +42,7 @@ services:
       DATABASE_URL_TEST: postgresql://forem:forem@db:5432/Forem_test
       ELASTICSEARCH_URL: http://elasticsearch:9200
     volumes:
-      - type: bind
-        source: .
-        target: /opt/apps/forem
+      - .:/opt/apps/forem:delegated
     command: ["./scripts/bundle.sh"]
 
   yarn:
@@ -63,9 +58,7 @@ services:
       DATABASE_URL_TEST: postgresql://forem:forem@db:5432/Forem_test
       ELASTICSEARCH_URL: http://elasticsearch:9200
     volumes:
-      - type: bind
-        source: .
-        target: /opt/apps/forem
+      - .:/opt/apps/forem:delegated
     command: yarn install --dev
 
 
