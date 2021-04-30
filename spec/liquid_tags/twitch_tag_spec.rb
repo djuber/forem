@@ -3,10 +3,11 @@ require "nokogiri"
 
 RSpec.describe TwitchTag, type: :liquid_tag do
   let(:slug) { "CuteSpicyNostrilDoritosChip" }
+  let(:host) { ENV["APP_DOMAIN"] }
 
   def assert_parses(slug, token)
     liquid = Liquid::Template.parse("{% twitch #{token} %}").render
-    expect(liquid).to include "https://clips.twitch.tv/embed?autoplay=false&clip=#{slug}&parent=localhost"
+    expect(liquid).to include "https://clips.twitch.tv/embed?autoplay=false&clip=#{slug}&parent=#{host}"
   end
 
   it "accepts twitch clip slug" do
