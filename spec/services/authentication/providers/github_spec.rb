@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Authentication::Providers::Github, type: :service do
+  let(:host) { ENV["APP_DOMAIN"] }
+
   describe ".authentication_path" do
     it "returns the correct authentication path" do
       expected_path = Rails.application.routes.url_helpers.user_github_omniauth_authorize_path
@@ -15,7 +17,7 @@ RSpec.describe Authentication::Providers::Github, type: :service do
 
   describe ".sign_in_path" do
     let(:expected_path) do
-      "/users/auth/github?callback_url=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Fgithub%2Fcallback"
+      "/users/auth/github?callback_url=http%3A%2F%2F#{CGI.escape(host)}%2Fusers%2Fauth%2Fgithub%2Fcallback"
     end
 
     it "returns the correct sign in path" do
