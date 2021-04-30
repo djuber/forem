@@ -85,7 +85,7 @@ FROM builder AS testing
 USER root
 
 RUN dnf install --setopt install_weak_deps=false -y \
-    chromium-headless chromedriver && \
+    chromium-headless chromedriver chromium && \
     yum clean all && \
     rm -rf /var/cache/yum
 
