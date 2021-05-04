@@ -3,6 +3,7 @@ module Github
   class OauthClient
     APP_AUTH_CREDENTIALS = %i[client_id client_secret].freeze
     APP_AUTH_CREDENTIALS_PRESENT = proc { |key, value| APP_AUTH_CREDENTIALS.include?(key) && value.present? }.freeze
+    EXPECTED_METHODS = %i[repository repositories readme issue_comments issue_markdown commits].freeze
 
     # @param credentials [Hash] the OAuth credentials, {client_id:, client_secret:} or {access_token:}
     def initialize(credentials = nil)
@@ -26,6 +27,14 @@ module Github
     private
 
     attr_reader :credentials
+
+    EXPECTED_METHODS.each do |method|
+      define_method(method) do |*new_args, &new_block|
+        request do
+          target.public_send(method, *new_args, &new_block)
+        end
+      end
+    end
 
     # adapted from https://api.rubyonrails.org/classes/Module.html#method-i-delegate_missing_to
     def method_missing(method, *args, &block)
