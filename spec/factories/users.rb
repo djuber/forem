@@ -10,7 +10,7 @@ FactoryBot.define do
     name                         { Faker::Name.name }
     email                        { generate :email }
     username                     { generate :username }
-    profile_image                { File.open(image_path) }
+    profile_image                { Rack::Test::UploadedFile.new(image_path, "image/jpeg") }
     twitter_username             { generate :twitter_username }
     github_username              { generate :github_username }
     confirmed_at                 { Time.current }
