@@ -63,11 +63,11 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "#release_adjusted_cache_key" do
     around do |example|
-      described_class.instance_variable_set(:@deployed_at, nil)
+      ForemInstance.instance_variable_set(:@deployed_at, nil)
 
       example.run
 
-      described_class.instance_variable_set(:@deployed_at, nil)
+      ForemInstance.instance_variable_set(:@deployed_at, nil)
     end
 
     it "does nothing when RELEASE_FOOTPRINT is not set" do
