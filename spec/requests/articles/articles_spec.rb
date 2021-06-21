@@ -265,6 +265,7 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "GET /new" do
+    let(:appdomain) { ApplicationConfig["APP_DOMAIN"] }
     before { sign_in user }
 
     context "with authorized user" do
@@ -283,12 +284,12 @@ RSpec.describe "Articles", type: :request do
 
     it "sets canonical url with base" do
       get "/new"
-      expect(response.body).to include('<link rel="canonical" href="http://localhost:3000/new" />')
+      expect(response.body).to include("<link rel=\"canonical\" href=\"http://#{appdomain}/new\" />")
     end
 
     it "sets canonical url with prefil" do
       get "/new?prefill=dsdweewewew"
-      expect(response.body).to include('<link rel="canonical" href="http://localhost:3000/new" />')
+      expect(response.body).to include("<link rel=\"canonical\" href=\"http://#{appdomain}/new\" />")
     end
   end
 
