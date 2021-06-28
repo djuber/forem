@@ -4,11 +4,12 @@ FactoryBot.define do
   factory :organization do
     name               { Faker::Company.name }
     summary            { Faker::Hipster.paragraph(sentence_count: 1)[0..150] }
-    profile_image      do
-      Rack::Test::UploadedFile
-        .new(Rails.root.join("app/assets/images/android-icon-36x36.png"),
-             "image/png")
-    end
+    profile_image      {
+      Rack::Test::UploadedFile.new(
+        Rails.root.join("app/assets/images/android-icon-36x36.png"),
+        "image/png"
+      )
+    }
     nav_image          { Faker::Avatar.image }
     url                { Faker::Internet.url }
     slug               { generate :slug }
