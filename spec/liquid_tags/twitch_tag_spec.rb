@@ -3,7 +3,7 @@ require "nokogiri"
 
 RSpec.describe TwitchTag, type: :liquid_tag do
   let(:slug) { "CuteSpicyNostrilDoritosChip" }
-  let(:host) { ENV["APP_DOMAIN"] }
+  let(:host) { ApplicationConfig["APP_DOMAIN"] }
 
   def assert_parses(slug, token)
     liquid = Liquid::Template.parse("{% twitch #{token} %}").render
