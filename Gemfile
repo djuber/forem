@@ -15,13 +15,13 @@ gem "acts-as-taggable-on", "~> 8.1" # A tagging plugin for Rails applications th
 gem "acts_as_follower", github: "forem/acts_as_follower", branch: "master" # Allow any model to follow any other model
 gem "addressable", "~> 2.8" # A replacement for the URI implementation that is part of Ruby's standard library
 gem "ahoy_email", "~> 2.0.2" # Email analytics for Rails
-gem "ahoy_matey", "~> 3.2" # Tracking analytics for Rails
+gem "ahoy_matey", "~> 4.0" # Tracking analytics for Rails
 gem "ancestry", "~> 4.1" # Ancestry allows the records of a ActiveRecord model to be organized in a tree structure
 gem "blazer", "~> 2.4.3" # Allows admins to query data
 gem "bootsnap", ">= 1.1.0", require: false # Boot large ruby/rails apps faster
 gem "carrierwave", "~> 2.2" # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends
 gem "carrierwave-bombshelter", "~> 0.2" # Protect your carrierwave from image bombs
-gem "cloudinary", "~> 1.20" # Client library for easily using the Cloudinary service
+gem "cloudinary", "~> 1.21" # Client library for easily using the Cloudinary service
 gem "counter_culture", "~> 2.8" # counter_culture provides turbo-charged counter caches that are kept up-to-date
 gem "ddtrace", "~> 0.52.0" # ddtrace is Datadog’s tracing client for Ruby.
 gem "devise", "~> 4.8" # Flexible authentication solution for Rails
@@ -34,10 +34,10 @@ gem "fastimage", "~> 2.2" # FastImage finds the size or type of an image given i
 gem "fastly", "~> 3.0" # Client library for the Fastly acceleration system
 gem "feedjira", "~> 3.2" # A feed fetching and parsing library
 gem "field_test", "~> 0.4" # A/B testing
-gem "flipper", "~> 0.22.0" # Feature flipping / flags for Ruby
+gem "flipper", "~> 0.22.1" # Feature flipping / flags for Ruby
 gem "flipper-active_record", "~> 0.22.0" # Store Flipper flags in ActiveRecord
-gem "flipper-ui", "~> 0.22.0"
-gem "fog-aws", "~> 3.11" # 'fog' gem to support Amazon Web Services
+gem "flipper-ui", "~> 0.22.1"
+gem "fog-aws", "~> 3.12" # 'fog' gem to support Amazon Web Services
 gem "front_matter_parser", "~> 1.0" # Parse a front matter from syntactically correct strings or files
 gem "gemoji", "~> 4.0.0.rc3" # Character information and metadata for standard and custom emoji
 gem "gibbon", "~> 3.4" # API wrapper for MailChimp's API
@@ -96,14 +96,14 @@ gem "rolify", "~> 6.0" # Very simple Roles library
 gem "rouge", "~> 3.26" # A pure-ruby code highlighter
 gem "rubyzip", "~> 2.3" # Rubyzip is a ruby library for reading and writing zip files
 gem "s3_direct_upload", "~> 0.1" # Direct Upload to Amazon S3
-gem "sidekiq", "~> 6.2.1" # Sidekiq is used to process background jobs with the help of Redis
+gem "sidekiq", "~> 6.2.2" # Sidekiq is used to process background jobs with the help of Redis
 gem "sidekiq-cron", "~> 1.1" # Allows execution of scheduled cron jobs as specific times
 gem "sidekiq-unique-jobs", "~> 7.0.12" # Ensures that Sidekiq jobs are unique when enqueued
 gem "sitemap_generator", "~> 6.1" # SitemapGenerator is a framework-agnostic XML Sitemap generator
 gem "slack-notifier", "~> 2.4" # A slim ruby wrapper for posting to slack webhooks
 gem "sprockets", "~> 4.0" # Sprockets is a Rack-based asset packaging system
 gem "staccato", "~> 0.5" # Ruby Google Analytics Measurement
-gem "store_attribute", "~> 0.8.1" # ActiveRecord extension which adds typecasting to store accessors.
+gem "store_attribute", "~> 0.9.0" # ActiveRecord extension which adds typecasting to store accessors.
 gem "storext", "~> 3.3" # Add type-casting and other features on top of ActiveRecord::Store.store_accessor
 gem "stripe", "~> 5.38" # Ruby library for the Stripe API
 gem "strong_migrations", "~> 0.7" # Catch unsafe migrations
@@ -112,8 +112,9 @@ gem "uglifier", "~> 4.2" # Uglifier minifies JavaScript files
 gem "ulid", "~> 1.3" # Universally Unique Lexicographically Sortable Identifier implementation for Ruby
 gem "validate_url", "~> 1.0" # Library for validating urls in Rails
 gem "vault", "~> 0.16" # Used to store secrets
+gem "view_component", "~> 2.38", require: "view_component/engine" # View components for Rails
 gem "wcag_color_contrast", "~> 0.1" # Detect contrast of colors to determine readability and a11y.
-gem "webpacker", "~> 5.4.0" # Use webpack to manage app-like JavaScript modules in Rails
+gem "webpacker", "~> 5.4.2" # Use webpack to manage app-like JavaScript modules in Rails
 
 group :development do
   gem "better_errors", "~> 2.9" # Provides a better error page for Rails and other Rack apps
@@ -127,7 +128,7 @@ group :development do
   gem "erb_lint", "~> 0.0.37", require: false # ERB Linter tool
   gem "guard", "~> 2.18", require: false # Guard is a command line tool to easily handle events on file system modifications
   gem "guard-livereload", "~> 2.5", require: false # Guard::LiveReload automatically reloads your browser when 'view' files are modified
-  gem "listen", "~> 3.6", require: false # Helps 'listen' to file system modifications events (also used by other gems like guard)
+  gem "listen", "~> 3.7", require: false # Helps 'listen' to file system modifications events (also used by other gems like guard)
   gem "memory_profiler", "~> 1.0", require: false # Memory profiling routines for Ruby 2.3+
   gem "pry", "~> 0.13" # An IRB alternative and runtime developer console
   gem "pry-rails", "~> 0.3" # Use Pry as your rails console
@@ -141,10 +142,10 @@ group :development, :test do
   gem "amazing_print", "~> 1.3" # Great Ruby debugging companion: pretty print Ruby objects to visualize their structure
   gem "bullet", "~> 6.1" # help to kill N+1 queries and unused eager loading
   gem "capybara", "~> 3.35.3" # Capybara is an integration testing tool for rack based web applications
-  gem "cypress-rails", "~> 0.5.1" # For end to end tests (E2E)
+  gem "cypress-rails", "~> 0.5.2" # For end to end tests (E2E)
   gem "dotenv-rails", "~> 2.7.6" # For loading ENV variables locally
-  gem "faker", "~> 2.18" # A library for generating fake data such as names, addresses, and phone numbers
-  gem "knapsack_pro", "~> 3.0.0" # Help parallelize Ruby spec builds
+  gem "faker", "~> 2.19" # A library for generating fake data such as names, addresses, and phone numbers
+  gem "knapsack_pro", "~> 3.1.0" # Help parallelize Ruby spec builds
   gem "pry-byebug", "~> 3.8" # Combine 'pry' with 'byebug'. Adds 'step', 'next', 'finish', 'continue' and 'break' commands to control execution
   gem "rspec-rails", "~> 5.0" # rspec-rails is a testing framework for Rails 3+
   gem "rubocop", "~> 1.19", require: false # Automatic Ruby code style checking tool
