@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Authentication::Providers::Facebook, type: :service do
-  let(:host) { ENV["APP_DOMAIN"] }
+  let(:host) { ApplicationConfig["APP_DOMAIN"] }
 
   describe ".authentication_path" do
     it "returns the correct authentication path" do

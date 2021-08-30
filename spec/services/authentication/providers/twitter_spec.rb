@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Authentication::Providers::Twitter, type: :service do
-  let(:host) { ENV["APP_DOMAIN"] }
+  let(:host) { ApplicationConfig["APP_DOMAIN"] }
 
   describe ".authentication_path" do
     it "returns the correct authentication path" do
@@ -18,7 +18,7 @@ RSpec.describe Authentication::Providers::Twitter, type: :service do
   describe ".sign_in_path" do
     let(:expected_path) do
       "/users/auth/twitter?callback_url=" \
-      "http%3A%2F%2F#{CGI.escape(host)}%2Fusers%2Fauth%2Ftwitter%2Fcallback&secure_image_url=true"
+        "http%3A%2F%2F#{CGI.escape(host)}%2Fusers%2Fauth%2Ftwitter%2Fcallback&secure_image_url=true"
     end
 
     it "returns the correct sign in path" do
